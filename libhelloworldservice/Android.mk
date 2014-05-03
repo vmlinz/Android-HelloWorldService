@@ -1,6 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
-tw_module_tags := eng user
+tw_module_tags := eng debug
 
 include $(CLEAR_VARS)
 
