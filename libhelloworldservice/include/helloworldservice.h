@@ -3,8 +3,8 @@
 
 #include <utils/KeyedVector.h>
 #include <utils/RefBase.h>
-#include <utils/IInterface.h>
-#include <utils/Parcel.h>
+#include <binder/IInterface.h>
+#include <binder/Parcel.h>
 #include <utils/String16.h>
 #include <utils/threads.h>
 #include <string.h>
@@ -29,15 +29,9 @@ class BnHelloWorldService : public android::BnInterface<IHelloWorldService>
 
 class HelloWorldService : public BnHelloWorldService
 {
-	class Client;
 
 public:
     static  void                instantiate();
-
-//    class Client : public BnMediaPlayer {
-//
-//        // IHelloWorld interface
-//    }
 
                             HelloWorldService();
     virtual                 ~HelloWorldService();
@@ -48,7 +42,6 @@ public:
                                  uint32_t flags);
 
     mutable     android::Mutex                       mLock;
-    android::SortedVector< android::wp<Client> >     mClients;
     int32_t                     mNextConnId;
 };
 

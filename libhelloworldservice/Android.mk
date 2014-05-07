@@ -22,7 +22,7 @@ LOCAL_PRELINK_MODULE := false
 # LOCAL_LDFLAGS += -llog
 
 LOCAL_SHARED_LIBRARIES += liblog
-LOCAL_SHARED_LIBRARIES += libutils libui
+LOCAL_SHARED_LIBRARIES += libutils libui libbinder
 
 LOCAL_CFLAGS += -Idalvik/libnativehelper/include/nativehelper
 

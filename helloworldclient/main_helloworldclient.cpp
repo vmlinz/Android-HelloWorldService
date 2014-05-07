@@ -10,16 +10,16 @@
 #include <unistd.h>
 #include <grp.h>
 
-#include <utils/IPCThreadState.h>
-#include <utils/ProcessState.h>
-#include <utils/IServiceManager.h>
+#include <binder/IPCThreadState.h>
+#include <binder/ProcessState.h>
+#include <binder/IServiceManager.h>
 #include <utils/Log.h>
 
 #include "helloworld.h"
 
 int main(int argc, char *argv[])
 {
-	LOGI("Hello client is now starting");
+	ALOGI("Hello client is now starting");
 
         android::sp<android::IServiceManager> sm = android::defaultServiceManager();
         android::sp<android::IBinder> binder;
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
                 binder = sm->getService(android::String16(HELLOWORLD_NAME));
                 if (binder != 0)
                         break;
-                LOGW("HelloWorld not published, waiting...");
+                ALOGW("HelloWorld not published, waiting...");
                 usleep(500000); // 0.5 s
         } while(true);
 
@@ -41,12 +41,12 @@ int main(int argc, char *argv[])
         //binder->linkToDeath(sDeathNotifier);
         //sMediaPlayerService = interface_cast<IMediaPlayerService>(binder);
 
-	LOGI("Hello client is now trying");
+	ALOGI("Hello client is now trying");
 
         shw = android::interface_cast<IHelloWorldClient>(binder);
         shw->hellothere("fun");
 	
-	LOGI("Hello client is now exiting");
+	ALOGI("Hello client is now exiting");
 
 	return(0);
 }

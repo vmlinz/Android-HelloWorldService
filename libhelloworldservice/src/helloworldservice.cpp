@@ -10,7 +10,7 @@
 #include <string.h>
 #include <cutils/atomic.h>
 #include <utils/Errors.h>
-#include <utils/IServiceManager.h>
+#include <binder/IServiceManager.h>
 #include <utils/String16.h>
 
 #include "helloworldservice.h"
@@ -32,18 +32,18 @@ void HelloWorldService::instantiate() {
 
 HelloWorldService::HelloWorldService()
 {
-    LOGE("HelloWorldService created");
+    ALOGE("HelloWorldService created");
     mNextConnId = 1;
 }
 
 HelloWorldService::~HelloWorldService()
 {
-    LOGE("HelloWorldService destroyed");
+    ALOGE("HelloWorldService destroyed");
 }
 
 #define CHECK_INTERFACE(interface, data, reply) \
         do { if (!data.enforceInterface(interface::getInterfaceDescriptor())) { \
-            LOGW("Call incorrectly routed to " #interface); \
+            ALOGW("Call incorrectly routed to " #interface); \
             return android::PERMISSION_DENIED;              \
         } } while (0)
 
@@ -52,7 +52,7 @@ android::status_t HelloWorldService::onTransact(uint32_t code,
                                                 android::Parcel *reply,
                                                 uint32_t flags)
 {
-        LOGE("OnTransact(%u,%u)", code, flags);
+        ALOGE("OnTransact(%u,%u)", code, flags);
         
         switch(code) {
         case HW_HELLOTHERE: {
@@ -60,7 +60,7 @@ android::status_t HelloWorldService::onTransact(uint32_t code,
                 const char *str;
                 str = data.readCString();
                 /* hellothere(str); */
-                LOGE("hello: %s\n", str);
+                ALOGE("hello: %s\n", str);
                 printf("hello: %s\n", str);
                 return android::NO_ERROR;
         } break;
